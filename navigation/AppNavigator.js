@@ -10,21 +10,16 @@ import CounterScreen from '../screens/CounterScreen'
 
 const defaultNavOptions = {
   headerStyle: {
-    backgroundColor:
-      Platform.OS === 'android' ? '#002856' : '#eaeaea',
+    backgroundColor: Platform.OS === 'android' ? '#002856' : '#eaeaea',
   },
   headerTintColor: Platform.OS === 'android' ? 'white' : '#002856',
 }
-
 
 const HomeStackNavigator = createStackNavigator()
 const HomeNavigator = () => {
   return (
     <HomeStackNavigator.Navigator screenOptions={defaultNavOptions}>
-      <HomeStackNavigator.Screen
-        name='Home'
-        component={HomeScreen}
-      />
+      <HomeStackNavigator.Screen name='Home' component={HomeScreen} />
     </HomeStackNavigator.Navigator>
   )
 }
@@ -36,6 +31,7 @@ const CounterNavigator = () => {
       <CounterStackNavigator.Screen
         name='Counter'
         component={CounterScreen}
+        initialParams={{ incrementBy: 3 }}
       />
     </CounterStackNavigator.Navigator>
   )
@@ -70,7 +66,13 @@ export const MainNavigator = () => {
         options={{
           tabBarLabel: 'Counter',
           tabBarIcon: ({ color }) => {
-            return <Ionicons name='game-controller-outline' size={25} color={color} />
+            return (
+              <Ionicons
+                name='game-controller-outline'
+                size={25}
+                color={color}
+              />
+            )
           },
           tabBarColor: '#002856',
         }}
