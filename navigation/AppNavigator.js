@@ -1,20 +1,26 @@
 import React from 'react'
 import { Platform } from 'react-native'
+// https://reactnavigation.org/docs/stack-navigator/#api-definition
 import { createStackNavigator } from '@react-navigation/stack'
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+// https://reactnavigation.org/docs/bottom-tab-navigator/#api-definition
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 
 import HomeScreen from '../screens/HomeScreen'
 import CounterScreen from '../screens/CounterScreen'
 
+// You can create a javascript object to pass reusable variables throughout the app
+import { Colors } from "../constants/StyleVariables";
+
+// You can define default nav options object to pass to stack screen options prop
 const defaultNavOptions = {
   headerStyle: {
-    backgroundColor: Platform.OS === 'android' ? '#002856' : '#eaeaea',
+    backgroundColor: Platform.OS === 'android' ? Colors.gartnerBluePrimary : 'white',
   },
-  headerTintColor: Platform.OS === 'android' ? 'white' : '#002856',
+  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.gartnerBluePrimary,
 }
 
+// Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 const HomeStackNavigator = createStackNavigator()
 const HomeNavigator = () => {
   return (
@@ -37,16 +43,11 @@ const CounterNavigator = () => {
   )
 }
 
-// Creates the navigation items at the bottom of the screen
-const Tab =
-  Platform.OS === 'android'
-    ? createMaterialBottomTabNavigator()
-    : createBottomTabNavigator()
-const activeTintColor = Platform.OS === 'android' ? 'white' : '#002856'
-
+// A simple tab bar on the bottom of the screen that lets you switch between different routes.
+const Tab = createBottomTabNavigator()
 export const MainNavigator = () => {
   return (
-    <Tab.Navigator tabBarOptions={{ activeTintColor: activeTintColor }}>
+    <Tab.Navigator tabBarOptions={{ activeTintColor: Colors.gartnerBluePrimary }}>
       <Tab.Screen
         key='home'
         name='Home'
@@ -56,7 +57,7 @@ export const MainNavigator = () => {
           tabBarIcon: ({ color }) => {
             return <Ionicons name='home' size={25} color={color} />
           },
-          tabBarColor: '#002856',
+          tabBarColor: Colors.gartnerBluePrimary,
         }}
       />
       <Tab.Screen
@@ -74,7 +75,7 @@ export const MainNavigator = () => {
               />
             )
           },
-          tabBarColor: '#002856',
+          tabBarColor: Colors.gartnerBluePrimary,
         }}
       />
     </Tab.Navigator>
